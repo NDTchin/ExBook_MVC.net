@@ -1,0 +1,38 @@
+@model IEnumerable<ExBook.Models.ComicBook>
+
+@{
+    ViewData["Title"] = "Danh Sách Sách Truyện Tranh";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <a href="@Url.Action("Create", "ComicBooks")" class="btn btn-primary">Thêm Sách Truyện Tranh Mới</a>
+</div>
+
+<table class="table table-bordered mt-3">
+    <thead>
+    <tr>
+        <th>Tiêu Đề</th>
+        <th>Tác Giả</th>
+        <th>Giá Mỗi Ngày</th>
+        <th>Thao Tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var comicBook in Model)
+    {
+        <tr>
+            <td>@comicBook.Title</td>
+            <td>@comicBook.Author</td>
+            <td>@comicBook.PricePerday.ToString("C2")</td>
+            <td>
+                <!-- Chỉnh sửa -->
+                <a href="@Url.Action("Edit", "ComicBooks", new { id = comicBook.CustomerBooksID })" class="btn btn-warning btn-sm">Chỉnh Sửa</a>
+                <!-- Xóa -->
+                <a href="@Url.Action("Delete", "ComicBooks", new { id = comicBook.CustomerBooksID })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
